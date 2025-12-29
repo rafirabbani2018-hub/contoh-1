@@ -53,6 +53,9 @@
 </div>
 
 <script>
+    // --- 1. TARO NOMOR WA DI SINI ---
+    const nomorWA = "6285780078780"; // Ganti dengan nomor kamu (awali dengan 62)
+    let riwayatPilihan = [];
     const content = {
         start: {
             question: "Mau ke mana kita?",
@@ -79,10 +82,10 @@
             ]
         },
         // Halaman Akhir
-        finish_A: { question: "It's a Date! ❤️", description: "Siap-siap ya, kita bakal cafe hopping di Jaksel. Aku jemput jam 10 pagi!", options: [] },
-        finish_B: { question: "Art Date! 🎨", description: "Pakai baju terbaikmu, kita ke Galeri Nasional. Can't wait!", options: [] },
-        finish_jakpus: { question: "Cuss ke Bogor! 🍃", description: "Kita cari udara segar di Sentul. Jangan lupa bawa jaket!", options: [] },
-        finish_depok: { question: "Bandung Bound! 🚗", description: "Siapkan playlist lagu favorit, perjalanan kita bakal seru!", options: [] }
+        finish_A: { question: "Okayy!! ", description: "Gua jemput jam 10 pagi!", options: [] },
+        finish_B: { question: "Siapp!! ", description: "PSiap-siap kakinya pegel wkwkwkwk", options: [] },
+        finish_jakpus: { question: "Okayy!! ", description: "Kita cari Vino sampe dapet. Semoga ketemu Aamiin!", options: [] },
+        finish_depok: { question: "Siapp!! 🚗", description: "Siapin topik yang banyak ya wkwkwk", options: [] }
     };
 
     function nextStep(step) {
@@ -114,4 +117,5 @@
 </body>
 
 </html>
+
 
