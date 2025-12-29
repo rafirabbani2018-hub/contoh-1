@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date Planner Kita ❤️</title>
+    <title>Date Planner Kita </title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -44,8 +44,8 @@
 <body>
 
 <div class="container" id="game-container">
-    <h1 id="question">Halo Sayang! ❤️</h1>
-    <p id="description">Aku mau ajak kamu date, tapi kamu yang tentukan jalannya ya. Siap?</p>
+    <h1 id="question">Halooo Haliza Amalia! </h1>
+    <p id="description">Dalam rangka silaturahmi gua mau ajak lu ketemuan, tapi disini lu yang nentuin pilihannya ya.</p>
     
     <div class="btn-group" id="options">
         <button onclick="nextStep('start')">Mulai Sekarang!</button>
@@ -55,27 +55,27 @@
 <script>
     const content = {
         start: {
-            question: "Mau date di mana kita?",
-            description: "Pilih zona nyamanmu hari ini:",
+            question: "Mau ke mana kita?",
+            description: "Pilih:",
             options: [
-                { text: "Dalam Jakarta aja", link: "jakarta" },
-                { text: "Luar Jakarta yuk!", link: "luar" }
+                { text: "Daerah Jakarta Timur aja", link: "jakarta" },
+                { text: "Luar Jakarta Timur", link: "luar" }
             ]
         },
         jakarta: {
-            question: "Oke, Dalam Jakarta!",
-            description: "Mau vibe yang seperti apa?",
+            question: "Oke, Daerah Jakarta Timur",
+            description: "Mau ngapain kita?",
             options: [
-                { text: "Jaksel (Cafe & Chill)", link: "finish_jaksel" },
-                { text: "Jakpus (Museum & Art)", link: "finish_jakpus" }
+                { text: "A (Ngopi kayak kemaren)", link: "finish_A" },
+                { text: "B (jalan-jalan di mall)", link: "finish_B" }
             ]
         },
         luar: {
-            question: "Wah, mau jalan jauh!",
+            question: "Wah, tumben mau jalan jauh!",
             description: "Ke mana tujuan kita?",
             options: [
-                { text: "Bogor (Sentul/Kebun Raya)", link: "finish_bogor" },
-                { text: "Bandung (Lembang/Dago)", link: "finish_bandung" }
+                { text: "Jakpus/Jaksel (Blok M/tentatif)", link: "finish_jakpus" },
+                { text: "Depok/Ciputat (tentatif)", link: "finish_depok" }
             ]
         },
         // Halaman Akhir
@@ -112,4 +112,5 @@
 </script>
 
 </body>
+
 </html>
