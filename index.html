@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Planner Kita ❤️</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff0f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #4a4a4a;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 { color: #ff4d6d; font-size: 1.5rem; }
+        p { margin-bottom: 2rem; line-height: 1.6; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        button {
+            background-color: #ff758f;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover { background-color: #ff4d6d; transform: scale(1.05); }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="game-container">
+    <h1 id="question">Halo Sayang! ❤️</h1>
+    <p id="description">Aku mau ajak kamu date, tapi kamu yang tentukan jalannya ya. Siap?</p>
+    
+    <div class="btn-group" id="options">
+        <button onclick="nextStep('start')">Mulai Sekarang!</button>
+    </div>
+</div>
+
+<script>
+    const content = {
+        start: {
+            question: "Mau date di mana kita?",
+            description: "Pilih zona nyamanmu hari ini:",
+            options: [
+                { text: "Dalam Jakarta aja", link: "jakarta" },
+                { text: "Luar Jakarta yuk!", link: "luar" }
+            ]
+        },
+        jakarta: {
+            question: "Oke, Dalam Jakarta!",
+            description: "Mau vibe yang seperti apa?",
+            options: [
+                { text: "Jaksel (Cafe & Chill)", link: "finish_jaksel" },
+                { text: "Jakpus (Museum & Art)", link: "finish_jakpus" }
+            ]
+        },
+        luar: {
+            question: "Wah, mau jalan jauh!",
+            description: "Ke mana tujuan kita?",
+            options: [
+                { text: "Bogor (Sentul/Kebun Raya)", link: "finish_bogor" },
+                { text: "Bandung (Lembang/Dago)", link: "finish_bandung" }
+            ]
+        },
+        // Halaman Akhir
+        finish_jaksel: { question: "It's a Date! ❤️", description: "Siap-siap ya, kita bakal cafe hopping di Jaksel. Aku jemput jam 10 pagi!", options: [] },
+        finish_jakpus: { question: "Art Date! 🎨", description: "Pakai baju terbaikmu, kita ke Galeri Nasional. Can't wait!", options: [] },
+        finish_bogor: { question: "Cuss ke Bogor! 🍃", description: "Kita cari udara segar di Sentul. Jangan lupa bawa jaket!", options: [] },
+        finish_bandung: { question: "Bandung Bound! 🚗", description: "Siapkan playlist lagu favorit, perjalanan kita bakal seru!", options: [] }
+    };
+
+    function nextStep(step) {
+        const data = content[step];
+        document.getElementById('question').innerText = data.question;
+        document.getElementById('description').innerText = data.description;
+        
+        const btnGroup = document.getElementById('options');
+        btnGroup.innerHTML = ""; // Hapus tombol lama
+
+        data.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.innerText = opt.text;
+            btn.onclick = () => nextStep(opt.link);
+            btnGroup.appendChild(btn);
+        });
+
+        // Jika tidak ada opsi lagi, berarti selesai
+        if (data.options.length === 0) {
+            const backBtn = document.createElement('button');
+            backBtn.innerText = "Ulangi Pilihan";
+            backBtn.style.backgroundColor = "#ccc";
+            backBtn.onclick = () => location.reload();
+            btnGroup.appendChild(backBtn);
+        }
+    }
+</script>
+
+</body>
+</html>
