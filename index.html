@@ -1,61 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date Planner Kita </title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fff0f3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            color: #4a4a4a;
-        }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
-        h1 { color: #ff4d6d; font-size: 1.5rem; }
-        p { margin-bottom: 2rem; line-height: 1.6; }
-        .btn-group { display: flex; flex-direction: column; gap: 10px; }
-        button {
-            background-color: #ff758f;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: transform 0.2s, background 0.3s;
-        }
-        button:hover { background-color: #ff4d6d; transform: scale(1.05); }
-        .hidden { display: none; }
-    </style>
-</head>
-<body>
-
-<div class="container" id="game-container">
-    <h1 id="question">Halooo Haliza Amalia! </h1>
-    <p id="description">Dalam rangka silaturahmi gua mau ajak lu ketemuan, tapi disini lu yang nentuin pilihannya ya.</p>
-    
-    <div class="btn-group" id="options">
-        <button onclick="nextStep('start')">Mulai Sekarang!</button>
-    </div>
-</div>
-
 <script>
-    // --- 1. TARO NOMOR WA DI SINI ---
-    const nomorWA = "6285780078780"; // Ganti dengan nomor kamu (awali dengan 62)
+    // --- 1. KONFIGURASI ---
+    const nomorWA = "6285780078780"; 
     let riwayatPilihan = [];
+
     const content = {
         start: {
             question: "Mau ke mana kita?",
@@ -69,8 +16,8 @@
             question: "Oke, Daerah Jakarta Timur",
             description: "Mau ngapain kita?",
             options: [
-                { text: "A (Ngopi kayak kemaren)", link: "finish_A" },
-                { text: "B (jalan-jalan di mall)", link: "finish_B" }
+                { text: "Ngopi kayak kemaren", link: "finish_A" },
+                { text: "Jalan-jalan di mall", link: "finish_B" }
             ]
         },
         luar: {
@@ -81,30 +28,48 @@
                 { text: "Depok/Ciputat (tentatif)", link: "finish_depok" }
             ]
         },
-        // Halaman Akhir
         finish_A: { question: "Okayy!! ", description: "Gua jemput jam 10 pagi!", options: [] },
-        finish_B: { question: "Siapp!! ", description: "PSiap-siap kakinya pegel wkwkwkwk", options: [] },
+        finish_B: { question: "Siapp!! ", description: "Siap-siap kakinya pegel wkwkwkwk", options: [] },
         finish_jakpus: { question: "Okayy!! ", description: "Kita cari Vino sampe dapet. Semoga ketemu Aamiin!", options: [] },
-        finish_depok: { question: "Siapp!! 🚗", description: "Siapin topik yang banyak ya wkwkwk", options: [] }
+        finish_depok: { question: "Siapp!! ", description: "Siapin topik yang banyak ya wkwkwk", options: [] }
     };
 
-    function nextStep(step) {
+    // --- 2. LOGIKA PERBAIKAN ---
+    function nextStep(step, textKlik) {
+        // Simpan pilihan ke riwayat
+        if(textKlik) riwayatPilihan.push(textKlik);
+
         const data = content[step];
         document.getElementById('question').innerText = data.question;
         document.getElementById('description').innerText = data.description;
         
         const btnGroup = document.getElementById('options');
-        btnGroup.innerHTML = ""; // Hapus tombol lama
+        btnGroup.innerHTML = ""; 
 
+        // Buat tombol opsi
         data.options.forEach(opt => {
             const btn = document.createElement('button');
             btn.innerText = opt.text;
-            btn.onclick = () => nextStep(opt.link);
+            // Kirim teks tombol saat diklik agar bisa dicatat
+            btn.onclick = () => nextStep(opt.link, opt.text);
             btnGroup.appendChild(btn);
         });
 
-        // Jika tidak ada opsi lagi, berarti selesai
+        // JIKA SUDAH DI HALAMAN AKHIR
         if (data.options.length === 0) {
+            // Buat rangkuman pesan untuk WA
+            const rangkuman = riwayatPilihan.join(" > ");
+            const pesan = encodeURIComponent("Oi, gue udah pilih rencananya: " + rangkuman);
+            
+            // BUAT TOMBOL WHATSAPP
+            const waBtn = document.createElement('button');
+            waBtn.innerText = "Kabari lewat WA";
+            waBtn.style.backgroundColor = "#25D366"; // Warna Hijau WA
+            waBtn.style.marginBottom = "10px";
+            waBtn.onclick = () => window.open(`https://wa.me/${nomorWA}?text=${pesan}`);
+            btnGroup.appendChild(waBtn);
+
+            // Tombol Ulangi
             const backBtn = document.createElement('button');
             backBtn.innerText = "Ulangi Pilihan";
             backBtn.style.backgroundColor = "#ccc";
@@ -113,9 +78,3 @@
         }
     }
 </script>
-
-</body>
-
-</html>
-
-
