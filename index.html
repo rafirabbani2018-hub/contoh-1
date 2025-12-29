@@ -44,7 +44,7 @@
 
 <div class="container" id="game-container">
     <h1 id="question">Halooo Haliza Amalia! 👋</h1>
-    <p id="description">Dalam rangka silaturahmi gua mau ajak lu ketemuan, tapi di sini lu yang nentuin pilihannya ya.</p>
+    <p id="description">Dalam rangka silaturahmi gua mau ajak lu ketemuan, tapi ini lu yang nentuin pilihannya ya.</p>
     
     <div class="btn-group" id="options">
         <button onclick="nextStep('start')">Mulai Sekarang!</button>
@@ -59,7 +59,7 @@
     const content = {
         start: {
             question: "Mau ke mana kita?",
-            description: "Pilih rutenya:",
+            description: "Pilih:",
             options: [
                 { text: "Daerah Jakarta Timur aja", link: "jakarta" },
                 { text: "Luar Jakarta Timur", link: "luar" }
@@ -81,10 +81,10 @@
                 { text: "Depok/Ciputat (tentatif)", link: "finish_depok" }
             ]
         },
-        finish_A: { question: "Okayy!! ☕", description: "Gua jemput jam 10 pagi!", options: [] },
-        finish_B: { question: "Siapp!! 🛍️", description: "Siap-siap kakinya pegel wkwkwkwk", options: [] },
-        finish_jakpus: { question: "Okayy!! 🔍", description: "Kita cari Vino sampe dapet. Semoga ketemu Aamiin!", options: [] },
-        finish_depok: { question: "Siapp!! 🚗", description: "Siapin topik yang banyak ya wkwkwk", options: [] }
+        finish_A: { question: "Okayy!! ", description: "Gua jemput jam 10 pagi!", options: [] },
+        finish_B: { question: "Siapp!! ", description: "Siap-siap kakinya pegel wkwkwkwk", options: [] },
+        finish_jakpus: { question: "Okayy!! ", description: "Kita cari Vino sampe dapet. Semoga ketemu Aamiin!", options: [] },
+        finish_depok: { question: "Siapp!! ", description: "Siapin topik yang banyak ya wkwkwk", options: [] }
     };
 
     // --- 2. LOGIKA UTAMA ---
@@ -111,7 +111,7 @@
         } else {
             // HALAMAN AKHIR: Munculkan tombol WhatsApp
             const rangkuman = riwayatPilihan.join(" > ");
-            const pesan = encodeURIComponent("Oi, gue udah pilih rencananya: " + rangkuman);
+            const pesan = encodeURIComponent("Okayy, jadinya: " + rangkuman);
             
             const waBtn = document.createElement('button');
             waBtn.innerText = "Kabari lewat WA";
@@ -120,13 +120,9 @@
             waBtn.onclick = () => window.open(`https://wa.me/${nomorWA}?text=${pesan}`);
             btnGroup.appendChild(waBtn);
 
-            const backBtn = document.createElement('button');
-            backBtn.innerText = "Ulangi Pilihan";
-            backBtn.style.backgroundColor = "#ccc";
-            backBtn.onclick = () => location.reload();
-            btnGroup.appendChild(backBtn);
         }
     }
 </script>
 </body>
 </html>
+
